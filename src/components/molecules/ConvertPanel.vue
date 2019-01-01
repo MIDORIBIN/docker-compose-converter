@@ -5,7 +5,7 @@
         <v-textarea
                 outline
                 label="Docker run command"
-                :value=command
+                v-model=command
         ></v-textarea>
       </v-flex>
       <v-flex xs6>
@@ -24,11 +24,8 @@ import Vue from 'vue';
 import convert from '@/service/convert-docker-command.ts';
 
 export default Vue.extend({
-  props: {
-    msg: String,
-  },
   data: () => ({
-    command: 'command',
+    command: 'docker run nginx',
   }),
   computed: {
     compose(): string {
