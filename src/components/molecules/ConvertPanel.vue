@@ -2,17 +2,24 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs6>
+        <div class="title">Docker run command</div>
         <v-textarea
                 outline
-                label="Docker run command"
+                auto-grow
+                solo
+                clearable
                 v-model=command
+                :placeholder=commandPlaceholder
         ></v-textarea>
       </v-flex>
       <v-flex xs6>
+        <div class="title">Docker Compose</div>
         <v-textarea
                 outline
-                label="docker-compose"
+                auto-grow
+                solo
                 :value=compose
+                :placeholder=composePlaceholder
         ></v-textarea>
       </v-flex>
     </v-layout>
@@ -25,10 +32,18 @@ import convert from '@/service/convert-docker-command.ts';
 
 export default Vue.extend({
   data: () => ({
-    command: 'docker run nginx',
+    command: '',
+    commandPlaceholder: 'e.g.) docker run nginx',
+    composePlaceholder: 'version: 3\n' +
+      'services:\n' +
+      '    nginx:\n' +
+      '        image: nginx',
   }),
   computed: {
     compose(): string {
+      if (this.command.length === 0) {
+        return '';
+      }
       return convert(this.command);
     },
   },
