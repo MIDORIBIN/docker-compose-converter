@@ -25,9 +25,21 @@
                 outline
                 auto-grow
                 solo
-                :value=compose
+                v-model=compose
                 :placeholder=composePlaceholder
         ></v-textarea>
+        <v-btn
+                absolute
+                dark
+                fab
+                buttom
+                right
+                download="docker-compose.yml"
+                :href="href"
+                color="orange"
+        >
+          <v-icon>get_app</v-icon>
+        </v-btn>
         <v-img
                 src="https://raw.githubusercontent.com/docker/compose/master/logo.png"
                 contain
@@ -45,6 +57,7 @@ import convert from '@/service/convert-docker-command.ts';
 export default Vue.extend({
   data: () => ({
     command: '',
+    compose: '',
     commandPlaceholder: 'e.g.) docker run nginx',
     composePlaceholder: 'version: 3\n' +
       'services:\n' +
@@ -52,11 +65,18 @@ export default Vue.extend({
       '        image: nginx',
   }),
   computed: {
-    compose(): string {
+    href() {
+      const blob = new Blob([ this.compose ], { type : 'text/plain' });
+      const url: string = URL.createObjectURL(blob);
+      return url;
+    },
+  },
+  watch: {
+    command() {
       if (this.command.length === 0) {
-        return '';
+        this.compose = '';
       }
-      return convert(this.command);
+      this.compose = convert(this.command);
     },
   },
 });
