@@ -23,7 +23,5 @@ export default Vue.extend({
     App,
     ConvertPanel,
   },
-  data: () => ({
-  }),
 });
 </script>

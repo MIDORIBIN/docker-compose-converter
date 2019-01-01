@@ -2,8 +2,9 @@
   <v-container fluid grid-list-md>
     <v-layout row wrap>
       <v-flex xs6>
-        <div class="title">Docker run command</div>
+        <div class="title blue--text">Docker run command</div>
         <v-textarea
+                rows="15"
                 outline
                 auto-grow
                 solo
@@ -11,16 +12,27 @@
                 v-model=command
                 :placeholder=commandPlaceholder
         ></v-textarea>
+        <v-img
+                src="https://www.docker.com/sites/default/files/vertical_large.png"
+                contain
+                height="38vh"
+        ></v-img>
       </v-flex>
       <v-flex xs6>
-        <div class="title">Docker Compose</div>
+        <div class="title orange--text">Docker Compose</div>
         <v-textarea
+                rows="15"
                 outline
                 auto-grow
                 solo
                 :value=compose
                 :placeholder=composePlaceholder
         ></v-textarea>
+        <v-img
+                src="https://raw.githubusercontent.com/docker/compose/master/logo.png"
+                contain
+                height="38vh"
+        ></v-img>
       </v-flex>
     </v-layout>
   </v-container>
